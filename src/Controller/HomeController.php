@@ -10,8 +10,6 @@ class HomeController
     #[Route('/')]
     public function homepage(): Response
     {
-
-        dd($_SERVER);
         return new Response('Hello world');
     }
 }
