@@ -22,6 +22,7 @@ class AppFixtures extends Fixture
         LoanFactory::createMany(10, function () {
             return [
                 'books' => BookFactory::randomRange(1, 3),
+                # 'library' => LibraryFactory:random(),
             ];
         });
     }
