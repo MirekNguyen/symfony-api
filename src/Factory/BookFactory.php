@@ -49,6 +49,7 @@ final class BookFactory extends ModelFactory
         return [
             'description' => self::faker()->text(255),
             'title' => self::faker()->words(5, true),
+            'reviews' => self::faker()->numberBetween(0, 1000),
         ];
     }
 

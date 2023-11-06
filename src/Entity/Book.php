@@ -21,6 +21,9 @@ class Book
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    #[ORM\Column]
+    private ?int $reviews = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,18 @@ class Book
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getReviews(): ?int
+    {
+        return $this->reviews;
+    }
+
+    public function setReviews(int $reviews): static
+    {
+        $this->reviews = $reviews;
 
         return $this;
     }
