@@ -20,15 +20,15 @@ class AppFixtures extends Fixture
                 'author' => AuthorFactory::randomRange(1, 3),
             ];
         });
-        LoanFactory::createMany(10, function () {
-            return [
-                'books' => BookFactory::randomRange(1, 3),
-                # 'library' => LibraryFactory::random(),
-            ];
-        });
         LibraryFactory::createMany(3, function () {
             return [
                 'books' => BookFactory::randomRange(1, 10),
+            ];
+        });
+        LoanFactory::createMany(10, function () {
+            return [
+                'books' => BookFactory::randomRange(1, 3),
+                'library' => LibraryFactory::random(),
             ];
         });
     }

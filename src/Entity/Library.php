@@ -26,9 +26,13 @@ class Library
     #[ORM\ManyToMany(targetEntity: Book::class, inversedBy: 'libraries')]
     private Collection $books;
 
+    #[ORM\OneToMany(mappedBy: 'library', targetEntity: Loan::class, orphanRemoval: true)]
+    private Collection $loans;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
+        $this->loans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,6 +84,36 @@ class Library
     public function removeBook(Book $book): static
     {
         $this->books->removeElement($book);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Loan>
+     */
+    public function getLoans(): Collection
+    {
+        return $this->loans;
+    }
+
+    public function addLoan(Loan $loan): static
+    {
+        if (!$this->loans->contains($loan)) {
+            $this->loans->add($loan);
+            $loan->setLibrary($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLoan(Loan $loan): static
+    {
+        if ($this->loans->removeElement($loan)) {
+            // set the owning side to null (unless already changed)
+            if ($loan->getLibrary() === $this) {
+                $loan->setLibrary(null);
+            }
+        }
 
         return $this;
     }
