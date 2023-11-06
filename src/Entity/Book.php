@@ -34,9 +34,13 @@ class Book
     #[ORM\ManyToMany(targetEntity: Author::class, inversedBy: 'books')]
     private Collection $author;
 
+    #[ORM\ManyToMany(targetEntity: Loan::class, mappedBy: 'books')]
+    private Collection $loans;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
+        $this->loans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +104,33 @@ class Book
     public function removeAuthor(Author $author): static
     {
         $this->author->removeElement($author);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Loan>
+     */
+    public function getLoans(): Collection
+    {
+        return $this->loans;
+    }
+
+    public function addLoan(Loan $loan): static
+    {
+        if (!$this->loans->contains($loan)) {
+            $this->loans->add($loan);
+            $loan->addBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLoan(Loan $loan): static
+    {
+        if ($this->loans->removeElement($loan)) {
+            $loan->removeBook($this);
+        }
 
         return $this;
     }
