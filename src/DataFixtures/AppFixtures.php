@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        AuthorFactory::createMany(30);
+        AuthorFactory::createMany(15);
         BookFactory::createMany(20, function () {
             return [
                 'author' => AuthorFactory::randomRange(1, 3),
@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
         LoanFactory::createMany(10, function () {
             return [
                 'books' => BookFactory::randomRange(1, 3),
-                # 'library' => LibraryFactory:random(),
+                # 'library' => LibraryFactory::random(),
             ];
         });
         LibraryFactory::createMany(3, function () {
