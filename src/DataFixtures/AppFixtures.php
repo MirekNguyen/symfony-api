@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Book;
 use App\Factory\AuthorFactory;
 use App\Factory\BookFactory;
+use App\Factory\LibraryFactory;
 use App\Factory\LoanFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -23,6 +24,11 @@ class AppFixtures extends Fixture
             return [
                 'books' => BookFactory::randomRange(1, 3),
                 # 'library' => LibraryFactory:random(),
+            ];
+        });
+        LibraryFactory::createMany(3, function () {
+            return [
+                'books' => BookFactory::randomRange(1, 10),
             ];
         });
     }
