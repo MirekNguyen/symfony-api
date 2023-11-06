@@ -31,6 +31,10 @@ class Loan
     #[ORM\JoinColumn(nullable: false)]
     private ?Library $library = null;
 
+    #[ORM\ManyToOne(inversedBy: 'loans')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $borrower = null;
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
@@ -97,6 +101,18 @@ class Loan
     public function setLibrary(?Library $library): static
     {
         $this->library = $library;
+
+        return $this;
+    }
+
+    public function getBorrower(): ?User
+    {
+        return $this->borrower;
+    }
+
+    public function setBorrower(?User $borrower): static
+    {
+        $this->borrower = $borrower;
 
         return $this;
     }
