@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,9 +22,11 @@ class Book
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[ApiFilter(RangeFilter::class, properties: ['reviews'])]
     private ?int $reviews = null;
 
     public function getId(): ?int
