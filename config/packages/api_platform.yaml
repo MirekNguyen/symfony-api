@@ -1,6 +1,29 @@
 api_platform:
-    title: Hello API Platform
+    title: Dummy REST API - Book lending
+    description: |-
+      This is a sample Book lending backend based on the REST API specification with CRUD operations.
+      It's a sample project designed to showcase a practical implementation of database modeling concepts from a course I had at university. 
+      Every midnight, the API automatically regenerates its dataset to ensure that data is always available for testing and demonstration purposes.
+
+      You can find out more about this project on [Github](https://github.com/MirekNguyen/symfony-api)
+
+      How to make a custom CRUD request using API Platform (aka how to use this website):
+        1. Select request type: Click on the "GET" button for the relevant resource.
+        2. Try out: Click "Try it out" to enable input.
+        3. Add parameters: Enter any required parameters, such as id or filters.
+        4. Execute: Click "Execute" to send the request. Review the response and status code.
+      
+      
+      Example endpoints that are interesting:
+      - [Loans collection](/loans) - GET /loans
+      - [Books collection](/books) - GET /books
+
+      <p align="center">Database schema in Czech</p>
+      <p align="center">
+        <img src="screenshots/schema.gif" alt="drawing" width="700"/>
+      </p>
     version: 1.0.0
+    show_webby: false
     formats:
         jsonld: ['application/ld+json']
     docs_formats:
