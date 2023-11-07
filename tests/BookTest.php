@@ -12,7 +12,7 @@ class BookTest extends KernelTestCase
     public function testGetCollectionOfBooks(): void
     {
         $this->browser()
-            ->get("/api/books")
+            ->get("/books")
             ->dump();
     }
 }
