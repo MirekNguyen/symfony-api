@@ -49,7 +49,7 @@ final class AuthorFactory extends ModelFactory
         $faker = \Faker\Factory::create();
         $birthDate = $faker->dateTimeBetween('-1000 years', 'now');
         // Generate a random number of years to add to the birthDate
-        $yearsToAdd = $faker->numberBetween(1, 100);
+        $yearsToAdd = $faker->numberBetween(20, 100);
         // Create the deathDate by adding the random number of years to the birthDate
         $deathDate = (clone $birthDate)->modify("+$yearsToAdd years");
 

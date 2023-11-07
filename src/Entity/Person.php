@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "discr", type: "string")]
-#[ORM\DiscriminatorMap(['person' => 'Person', 'author' => 'Author'])]
+#[ORM\DiscriminatorMap(['person' => 'Person', 'author' => 'Author', 'user' => 'User'])]
 #[ApiResource]
 class Person
 {

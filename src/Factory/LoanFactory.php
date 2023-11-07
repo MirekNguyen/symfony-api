@@ -46,8 +46,19 @@ final class LoanFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $faker = \Faker\Factory::create();
+        $dateBorrowed = $faker->dateTimeBetween('-5 years', 'now');
+        // Generate a random number of years to add to the birthDate
+        $daysToAdd = $faker->numberBetween(1, 90);
+        // Create the deathDate by adding the random number of years to the birthDate
+        $dateReturned = (clone $dateBorrowed)->modify("+$daysToAdd days");
+        if ($faker->optional(0.7)->randomElement([true, false])) {
+            $dateReturned = null;
+        }
+
         return [
-            'dateBorrowed' => self::faker()->dateTime(),
+            'dateBorrowed' => $dateBorrowed,
+            'dateReturned' => $dateReturned,
         ];
     }
 
