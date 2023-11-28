@@ -5,4 +5,5 @@ services:
   database:
     ports:
       - "5432"
+    restart: unless-stopped
 ###< doctrine/doctrine-bundle ###
