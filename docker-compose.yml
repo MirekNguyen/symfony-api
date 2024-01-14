@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+  default:
+    name: event-manager-services
+
+volumes:
+  symfony-api-data:
+
+services:
+  symfony-api:
+    build: .
+    container_name: symfony-api
+    ports:
+      - 8083:8000
+    restart: unless-stopped
+    depends_on:
+      - symfony-api-db
+    # entrypoint: [ "php", "bin/console", "doctrine:migrations:migrate", "--no-interaction", "--allow-no-migration" ]
+  symfony-api-db:
+    image: postgres:${POSTGRES_VERSION:-15}-alpine
+    container_name: symfony-api-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+    volumes:
+      - symfony-api-data:/var/lib/postgresql/data:rw
